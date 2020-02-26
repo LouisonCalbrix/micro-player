@@ -1,8 +1,15 @@
-﻿function mod(n, m) {
+﻿// strictly positive modulo function to be used instead of %
+function mod(n, m) {
     return ((n % m) + m) % m;
 }
-// 2. This code loads the IFrame Player API code asynchronously.
+
+// load the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// ids of videos, index of currently played video and number of videos in the list
 var id_list = [
     'hs7jE4Ou6dA',
     'U6Hg5tnJ3OA',
@@ -15,12 +22,8 @@ var id_list = [
 var index = 0;
 var nb_elem = id_list.length;
 
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// 3. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads.
+// create an <iframe> (and YouTube player) after the API code downloads.
 var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
@@ -35,7 +38,7 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// 4. The API will call this function when the video player is ready.
+// functions triggered by player events
 function onPlayerReady(event) {
     console.log("vidéo ready");
     document.getElementById('button_play').onclick = vidPlay;
@@ -56,6 +59,8 @@ function onPlayerStateChange(event) {
     }
     document.getElementById('button_play').innerHTML = button_message;
 }
+
+// button functions
 function vidPlay(){
     if (player.getPlayerState()==1){
         player.pauseVideo();
@@ -67,24 +72,12 @@ function vidPlay(){
     }
 }
 function vidNext(){
-    // index = (index + 1).mod(nb_elem);
     index = mod(index + 1, nb_elem);
     console.log(index);
     player.loadVideoById(id_list[index]);
-    //vidPlay();
 }
 function vidPrev(){
-    // index = (index - 1).mod(nb_elem);
     index = mod(index -1, nb_elem);
     console.log(index);
     player.loadVideoById(id_list[index]);
-    //vidPlay();
 }
-
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-var done = false;
-function stopVideo() {
-player.stopVideo();
-    }
