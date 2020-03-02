@@ -1,0 +1,10 @@
+.illustration {
+    display: block;
+    width: 35vw;
+    height: auto;
+    transition: opacity 1s;
+}
+
+.transparent {
+    opacity: 0%;
+}
