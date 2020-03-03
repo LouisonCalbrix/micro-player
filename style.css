@@ -6,8 +6,17 @@
     width: 35vw;
     margin: 0 auto;
 }
-#controls button {
+button {
+    background-color: #AAA5;
+    color: black;
+    padding: 1vh 1vh 1vh 1vh;
+    border-radius: 0.8vw;
+    border: none;
     width: 20%;
+}
+button:hover{
+    background-color: #0005;
+    color: white;
 }
 
 .illustration {
@@ -15,11 +24,11 @@
     border-radius: 2%;
     box-shadow: 1.5vw 1.5vw 1.2vw grey;
     display: block;
-    width: 35vw;
+    width: 40vw;
     height: auto;
-    transition: opacity 1s;
+    transition: opacity 1s ease-in-out;
 }
 
 .transparent {
-    opacity: 0%;;
+    opacity: 0%;
 }
